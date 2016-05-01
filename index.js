@@ -3,7 +3,7 @@ var server = require('http').Server(app)
 var io = require('socket.io').listen(server)
 var shortid = require('shortid')
 
-app.set('port', 3000)
+app.set('port', process.env.PORT || 3000)
 
 app.get('/', function(req, res){
   res.send('<h1>Welcome to ePed server</h1>');
