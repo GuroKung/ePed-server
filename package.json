@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/GuroKung/ePed-server#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "shortid": "^2.2.6",
+    "socket.io": "^1.4.5"
   }
 }
