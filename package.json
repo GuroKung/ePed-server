@@ -1,0 +1,22 @@
+{
+  "name": "eped-server",
+  "version": "1.0.0",
+  "description": "Node server for multiplayer game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuroKung/ePed-server.git"
+  },
+  "author": "GuroKung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuroKung/ePed-server/issues"
+  },
+  "homepage": "https://github.com/GuroKung/ePed-server#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
