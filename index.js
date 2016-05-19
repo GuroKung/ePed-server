@@ -28,7 +28,7 @@ io.on('connection', function(_socket){
       id: shortid.generate(),
       name: data.name
     }
-
+    console.log('number of players: ' + clients.length)
     clients.push(currentUser)
     socket.emit('CONNECTED', currentUser)
     socket.broadcast.emit('USER_CONNECTED', currentUser)
