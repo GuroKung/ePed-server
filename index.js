@@ -16,7 +16,7 @@ var socket
 io.on('connection', function(_socket){
   console.log('on connection')
   socket = _socket
-  console.log(socket);
+  console.log(socket.conn.id);
   var result = {
     code: 200,
     message: 'Net available'
@@ -26,6 +26,7 @@ io.on('connection', function(_socket){
 
   socket.on('LOGIN', function (data) {
     var currentUser = {
+      socket_id: socket.conn.id,
       id: shortid.generate(),
       name: data.name,
       dances: ''
@@ -33,8 +34,8 @@ io.on('connection', function(_socket){
     console.log(data.name + ' is now connect to server')
     clients.push(currentUser)
     console.log('number of clients: ' + clients.length)
-    socket.emit('CONNECTED', currentUser)
-    socket.broadcast.emit('USER_CONNECTED', currentUser)
+    socket.emit('CONNECTED', {id: shortid.generate(), name: data.name, dances: ''})
+    //socket.broadcast.emit('USER_CONNECTED', currentUser)
 
     if (clients.length === 2) {
       console.log('game start...')
@@ -83,9 +84,12 @@ io.on('connection', function(_socket){
 
   socket.on('disconnect', function() {
       console.log('Got disconnect!');
-
-      // var i = allClients.indexOf(socket);
-      // allClients.splice(i, 1);
+      for(var i=0; i<clients.length ; i++){
+        if(clients[i].socket_id === socket.conn.id){
+          clients.splice(i ,1)
+        }
+      }
+      console.log('number of clients: ' + clients.length)
    })
 
 
