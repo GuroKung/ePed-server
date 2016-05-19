@@ -16,6 +16,7 @@ var socket
 io.on('connection', function(_socket){
   console.log('on connection')
   socket = _socket
+  console.log(socket);
   var result = {
     code: 200,
     message: 'Net available'
@@ -54,13 +55,13 @@ io.on('connection', function(_socket){
   })
 
   socket.on('LEADDANCE', function(data){
-    console.log(data)
+    console.log('lead dance: ' + data)
     players[0].dances = data.dances
     io.emit('ON_LEADDANCE', players[0].dances)
   })
 
   socket.on('FOLLOWDANCE', function(data){
-    console.log(data)
+    console.log('follow dance: ' + data)
     players[1].dances = data.dances
     var isEnd = false
     var ans = []
@@ -79,6 +80,14 @@ io.on('connection', function(_socket){
     lead = players.shift()
     players.push(lead)
   })
+
+  socket.on('disconnect', function() {
+      console.log('Got disconnect!');
+
+      // var i = allClients.indexOf(socket);
+      // allClients.splice(i, 1);
+   })
+
 
 })
 
