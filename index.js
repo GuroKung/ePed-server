@@ -28,12 +28,14 @@ io.on('connection', function(_socket){
       id: shortid.generate(),
       name: data.name
     }
+    console.log(data.name + ' is now connect to server')
     console.log('number of players: ' + clients.length)
     clients.push(currentUser)
     socket.emit('CONNECTED', currentUser)
     socket.broadcast.emit('USER_CONNECTED', currentUser)
 
     if (clients.length === 2) {
+      console.log('game start...')
       var players = {
         player1: clients[0],
         player2: clients[1]
