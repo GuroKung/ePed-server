@@ -32,6 +32,15 @@ io.on('connection', function(_socket){
     clients.push(currentUser)
     socket.emit('CONNECTED', currentUser)
     socket.broadcast.emit('USER_CONNECTED', currentUser)
+
+    if (clients.length === 2) {
+      var players = {
+        player1: clients[0],
+        player2: clients[1]
+      }
+      socket.emit('GAMESTART', players)
+    }
+
   })
 
   socket.on('BeepBeep', function(){
