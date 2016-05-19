@@ -43,7 +43,7 @@ io.on('connection', function(_socket){
       }
       console.log(game_players)
       players = [clients[0], clients[1]]
-      socket.broadcast.emit('GAMESTART', game_players)
+      io.emit('GAMESTART', game_players)
     }
 
   })
@@ -56,7 +56,7 @@ io.on('connection', function(_socket){
   socket.on('LEADDANCE', function(data){
     console.log(data)
     players[0].dance = data.dance
-    socket.broadcast.emit('ON_LEADDANCE', players[0].dance)
+    io.emit('ON_LEADDANCE', players[0].dance)
   })
 
   socket.on('FOLLOWDANCE', function(data){
@@ -65,20 +65,15 @@ io.on('connection', function(_socket){
     var isEnd = false
     var ans = []
     for(var i=0; i<players[0].dance.length ; i++){
-      if(players[0].dance[i] !== players[1].dance[i]){
-        isEnd = true
-        break
-      }
-    }
-    for(var i=0; i<players[0].dance.length ; i++){
       if(players[0].dance[i] === players[1].dance[i]){
         ans.push[true]
       }
       else{
         ans.push[false]
+        isEnd = true
       }
     }
-    socket.broadcast.emit('ON_CHECKDANCE', { player1_dance: players[0].dance, player2_dance: players[1].dance, ans: ans, isEnd: isEnd })
+    io.emit('ON_CHECKDANCE', { player1_dance: players[0].dance, player2_dance: players[1].dance, ans: ans, isEnd: isEnd })
 
     // switch lead into follow
     lead = players.shift()
