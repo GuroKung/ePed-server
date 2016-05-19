@@ -27,7 +27,7 @@ io.on('connection', function(_socket){
     var currentUser = {
       id: shortid.generate(),
       name: data.name,
-      dance: ''
+      dances: ''
     }
     console.log(data.name + ' is now connect to server')
     clients.push(currentUser)
@@ -55,17 +55,17 @@ io.on('connection', function(_socket){
 
   socket.on('LEADDANCE', function(data){
     console.log(data)
-    players[0].dance = data.dance
-    io.emit('ON_LEADDANCE', players[0].dance)
+    players[0].dances = data.dances
+    io.emit('ON_LEADDANCE', players[0].dances)
   })
 
   socket.on('FOLLOWDANCE', function(data){
     console.log(data)
-    players[1].dance = data.dance
+    players[1].dances = data.dances
     var isEnd = false
     var ans = []
-    for(var i=0; i<players[0].dance.length ; i++){
-      if(players[0].dance[i] === players[1].dance[i]){
+    for(var i=0; i<players[0].dances.length ; i++){
+      if(players[0].dances[i] === players[1].dances[i]){
         ans.push[true]
       }
       else{
@@ -73,7 +73,7 @@ io.on('connection', function(_socket){
         isEnd = true
       }
     }
-    io.emit('ON_CHECKDANCE', { player1_dance: players[0].dance, player2_dance: players[1].dance, ans: ans, isEnd: isEnd })
+    io.emit('ON_CHECKDANCE', { player1_dance: players[0].dances, player2_dance: players[1].dances, ans: ans, isEnd: isEnd })
 
     // switch lead into follow
     lead = players.shift()
