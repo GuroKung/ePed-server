@@ -23,11 +23,10 @@ io.on('connection', function(_socket){
 
   socket.emit('NET_AVAILABLE', result)
 
-  socket.on('SIGNUP', function (data) {
+  socket.on('LOGIN', function (data) {
     var currentUser = {
       id: shortid.generate(),
-      name: data.name,
-      position: data.position
+      name: data.name
     }
 
     clients.push(currentUser)
