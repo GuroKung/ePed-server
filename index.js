@@ -58,29 +58,29 @@ io.on('connection', function(_socket){
   socket.on('LEADDANCE', function(data){
     console.log('lead dance: ' + data)
     players[0].dances = data.dances
-    io.emit('ON_LEADDANCE', players[0].dances)
+    io.emit('ON_LEADDANCE', { lead_dances: players[0].dances })
   })
 
-  socket.on('FOLLOWDANCE', function(data){
-    console.log('follow dance: ' + data)
-    players[1].dances = data.dances
-    var isEnd = false
-    var ans = []
-    for(var i=0; i<players[0].dances.length ; i++){
-      if(players[0].dances[i] === players[1].dances[i]){
-        ans.push[true]
-      }
-      else{
-        ans.push[false]
-        isEnd = true
-      }
-    }
-    io.emit('ON_CHECKDANCE', { player1_dance: players[0].dances, player2_dance: players[1].dances, ans: ans, isEnd: isEnd })
-
-    // switch lead into follow
-    lead = players.shift()
-    players.push(lead)
-  })
+  // socket.on('FOLLOWDANCE', function(data){
+  //   console.log('follow dance: ' + data)
+  //   players[1].dances = data.dances
+  //   var isEnd = false
+  //   var ans = []
+  //   for(var i=0; i<players[0].dances.length ; i++){
+  //     if(players[0].dances[i] === players[1].dances[i]){
+  //       ans.push[true]
+  //     }
+  //     else{
+  //       ans.push[false]
+  //       isEnd = true
+  //     }
+  //   }
+  //   io.emit('ON_CHECKDANCE', { player1_dance: players[0].dances, player2_dance: players[1].dances, ans: ans, isEnd: isEnd })
+  //
+  //   // switch lead into follow
+  //   lead = players.shift()
+  //   players.push(lead)
+  // })
 
   // socket.on('disconnect', function() {
   //     console.log('Got disconnect!');
