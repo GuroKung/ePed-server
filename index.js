@@ -35,7 +35,7 @@ io.on('connection', function(_socket){
     socket.emit('CONNECTED', currentUser)
     socket.broadcast.emit('USER_CONNECTED', currentUser)
 
-    if (countPlayer === 2) {
+    if (clients.length === 2) {
       console.log('game start...')
       var game_players = {
         player1: clients[0],
