@@ -34,6 +34,11 @@ io.on('connection', function(_socket){
     socket.broadcast.emit('USER_CONNECTED', currentUser)
   })
 
+  socket.on('BeepBeep', function(){
+    console.log('beep beep beep')
+    socket.emit('OnBeepBeep', { status: 'kuy ped'})
+  })
+
   socket.on('PLAY_AVAILABLE', function(){
     // player request
     var players = {
