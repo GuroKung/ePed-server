@@ -82,16 +82,16 @@ io.on('connection', function(_socket){
     players.push(lead)
   })
 
-  socket.on('disconnect', function() {
-      console.log('Got disconnect!');
-      for(var i=0; i<clients.length ; i++){
-        if(clients[i].socket_id === socket.conn.id){
-          clients.splice(i ,1)
-        }
-      }
-      console.log('number of clients: ' + clients.length)
-      console.log('current clients: ' + clients)
-   })
+  // socket.on('disconnect', function() {
+  //     console.log('Got disconnect!');
+  //     for(var i=0; i<clients.length ; i++){
+  //       if(clients[i].socket_id === socket.conn.id){
+  //         clients.splice(i ,1)
+  //       }
+  //     }
+  //     console.log('number of clients: ' + clients.length)
+  //     console.log('current clients: ' + clients)
+  //  })
 
 
 })
