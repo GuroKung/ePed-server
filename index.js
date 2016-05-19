@@ -41,8 +41,9 @@ io.on('connection', function(_socket){
         player1: clients[0],
         player2: clients[1]
       }
+      console.log(game_players)
       players = [clients[0], clients[1]]
-      socket.emit('GAMESTART', game_players)
+      socket.broadcast.emit('GAMESTART', game_players)
     }
 
   })
