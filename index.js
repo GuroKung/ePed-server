@@ -90,6 +90,7 @@ io.on('connection', function(_socket){
         }
       }
       console.log('number of clients: ' + clients.length)
+      console.log('current clients: ' + clients)
    })
 
 
