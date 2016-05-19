@@ -14,8 +14,9 @@ var countPlayer = 0
 var socket
 
 io.on('connection', function(_socket){
+  console.log('on connection')
   socket = _socket
-  var ressult = {
+  var result = {
     code: 200,
     message: 'Net available'
   }
