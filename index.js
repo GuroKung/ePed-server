@@ -40,8 +40,8 @@ io.on('connection', function(_socket){
     if (clients.length === 2) {
       console.log('game start...')
       var game_players = {
-        player1: clients[0],
-        player2: clients[1]
+        player1: {id: clients[0].id, name: clients[0].name, dances: clients[0].dances},
+        player2: {id: clients[1].id, name: clients[1].name, dances: clients[1].dances}
       }
       console.log(game_players)
       players = [clients[0], clients[1]]
@@ -82,16 +82,16 @@ io.on('connection', function(_socket){
     players.push(lead)
   })
 
-  // socket.on('disconnect', function() {
-  //     console.log('Got disconnect!');
-  //     for(var i=0; i<clients.length ; i++){
-  //       if(clients[i].socket_id === socket.conn.id){
-  //         clients.splice(i ,1)
-  //       }
-  //     }
-  //     console.log('number of clients: ' + clients.length)
-  //     console.log('current clients: ' + clients)
-  //  })
+  socket.on('disconnect', function() {
+      console.log('Got disconnect!');
+      for(var i=0; i<clients.length ; i++){
+        if(clients[i].socket_id === socket.conn.id){
+          clients.splice(i ,1)
+        }
+      }
+      console.log('number of clients: ' + clients.length)
+      console.log('current clients: ' + clients)
+   })
 
 
 })
