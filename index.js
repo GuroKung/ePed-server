@@ -65,7 +65,7 @@ io.on('connection', function(_socket){
         break
       }
     }
-    console.log('Current player: ' + players.length);
+    console.log('Current player: ' + players.length)
     if (players.length === 2) {
       console.log('game start...')
       var game_players = {
@@ -109,6 +109,12 @@ io.on('connection', function(_socket){
       for(var i=0; i<clients.length ; i++){
         if(clients[i].socket_id === socket.conn.id){
           clients.splice(i ,1)
+        }
+      }
+      for (var i = 0; i < players.length; i++) {
+        if(players[i].socket_id === socket.conn.id){
+          players = []
+          break
         }
       }
       console.log('number of clients: ' + clients.length)
