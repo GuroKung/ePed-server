@@ -61,9 +61,18 @@ io.on('connection', function(_socket){
       console.log(clients[i].id);
       if(clients[i].id == data.player_id){
         players.push(clients[i])
-        socket.emit('USER_JOIN', { player1: players[0], player2: players[1]})
+        socket.emit('USER_JOIN')
         break
       }
+    }
+    if (players.length === 2) {
+      console.log('game start...')
+      var game_players = {
+        player1: {id: players[0].id, name: players[0].name, dances: players[0].dances},
+        player2: {id: players[1].id, name: players[1].name, dances: players[1].dances}
+      }
+      console.log(game_players)
+      io.emit('GAMESTART', game_players)
     }
   })
 
