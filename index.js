@@ -11,6 +11,7 @@ app.get('/', function(req, res){
 
 var players = []
 var clients = []
+var rooms = ['ABC']
 var socket
 
 io.on('connection', function(_socket){
@@ -25,34 +26,45 @@ io.on('connection', function(_socket){
   socket.emit('NET_AVAILABLE', result)
 
   socket.on('LOGIN', function (data) {
+    var id_gen = shortid.generate()
     var currentUser = {
       socket_id: socket.conn.id,
-      id: shortid.generate(),
+      id: id_gen,
       name: data.name,
       dances: ''
     }
     console.log(data.name + ' is now connect to server')
     clients.push(currentUser)
     console.log('number of clients: ' + clients.length)
-    socket.emit('CONNECTED', {id: shortid.generate(), name: data.name, dances: ''})
+    console.log('id: ' + id_gen);
+    socket.emit('CONNECTED', {id: id_gen, name: data.name, dances: ''})
     //socket.broadcast.emit('USER_CONNECTED', currentUser)
 
-    if (clients.length === 2) {
-      console.log('game start...')
-      var game_players = {
-        player1: {id: clients[0].id, name: clients[0].name, dances: clients[0].dances},
-        player2: {id: clients[1].id, name: clients[1].name, dances: clients[1].dances}
-      }
-      console.log(game_players)
-      players = [clients[0], clients[1]]
-      io.emit('GAMESTART', game_players)
-    }
+    // if (clients.length === 2) {
+    //   console.log('game start...')
+    //   var game_players = {
+    //     player1: {id: clients[0].id, name: clients[0].name, dances: clients[0].dances},
+    //     player2: {id: clients[1].id, name: clients[1].name, dances: clients[1].dances}
+    //   }
+    //   console.log(game_players)
+    //   players = [clients[0], clients[1]]
+    //   io.emit('GAMESTART', game_players)
+    // }
 
   })
 
-  socket.on('BeepBeep', function(){
-    console.log('beep beep beep')
-    socket.emit('OnBeepBeep', { status: 'kuy ped'})
+  socket.on('JOIN_GAME', function(data){
+    console.log('user join the game')
+    console.log(data)
+    socket.join(rooms['ABC'])
+    for(var i=0 ; i<clients.length ; i++){
+      console.log(clients[i].id);
+      if(clients[i].id == data.player_id){
+        players.push(clients[i])
+        socket.emit('USER_JOIN', {id: shortid.generate(), name: data.name, dances: ''})
+        break
+      }
+    }
   })
 
   socket.on('LEADDANCE', function(data){
