@@ -59,12 +59,13 @@ io.on('connection', function(_socket){
     socket.join(rooms['ABC'])
     for(var i=0 ; i<clients.length ; i++){
       console.log(clients[i].id);
-      if(clients[i].id == data.player_id){
+      if(clients[i].id == data.player_id && players.length < 2){
         players.push(clients[i])
         socket.emit('USER_JOIN')
         break
       }
     }
+    console.log('Current player: ' + players.length);
     if (players.length === 2) {
       console.log('game start...')
       var game_players = {
