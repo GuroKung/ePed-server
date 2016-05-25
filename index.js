@@ -61,7 +61,7 @@ io.on('connection', function(_socket){
       console.log(clients[i].id);
       if(clients[i].id == data.player_id){
         players.push(clients[i])
-        socket.emit('USER_JOIN', {id: shortid.generate(), name: data.name, dances: ''})
+        socket.emit('USER_JOIN', { player1: players[0], player2: players[1]})
         break
       }
     }
