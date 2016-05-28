@@ -1,2 +1,2 @@
 # ePed-server
-Node server for Journey of ePed multiplayer game
+NodeJS / SocketIO server for Follow Ma Lead multiplayer game
